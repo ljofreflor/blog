@@ -1,13 +1,15 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { notFound } from "next/navigation"
 
 import { buttonVariants } from "@/components/ui/button"
+import { EnsayoAusente } from "@/components/ensayo-ausente"
 import { formatearFecha, getEnsayo, getEnsayos } from "@/lib/ensayos"
 
 type EnsayoPageProps = {
   params: Promise<{ slug: string }>
 }
+
+export const dynamicParams = false
 
 export function generateStaticParams() {
   return getEnsayos().map((ensayo) => ({ slug: ensayo.slug }))
@@ -34,7 +36,7 @@ export default async function EnsayoPage({ params }: EnsayoPageProps) {
   const ensayo = getEnsayo(slug)
 
   if (!ensayo) {
-    notFound()
+    return <EnsayoAusente />
   }
 
   return (
