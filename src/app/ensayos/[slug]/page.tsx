@@ -12,7 +12,15 @@ type EnsayoPageProps = {
 export const dynamicParams = false
 
 export function generateStaticParams() {
-  return getEnsayos().map((ensayo) => ({ slug: ensayo.slug }))
+  const publicados = getEnsayos()
+
+  // La exportación estática exige al menos una ruta. Sin ensayos, esa ruta
+  // es el aviso de texto ausente: no es una publicación y no entra en la lista.
+  if (publicados.length === 0) {
+    return [{ slug: "no-encontrado" }]
+  }
+
+  return publicados.map((ensayo) => ({ slug: ensayo.slug }))
 }
 
 export async function generateMetadata({

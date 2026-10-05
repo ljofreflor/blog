@@ -11,7 +11,9 @@ npm install
 npm run dev
 ```
 
-Abre [http://localhost:3000](http://localhost:3000).
+Abre [http://localhost:3000/blog](http://localhost:3000/blog).
+
+El sitio público está en [https://ljofreflor.github.io/blog/](https://ljofreflor.github.io/blog/). Cada push a `main` publica la exportación estática con GitHub Pages. Las rutas quedan bajo `/blog`.
 
 ## Qué hay
 

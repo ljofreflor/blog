@@ -1,8 +1,26 @@
-import Link from "next/link"
+"use client"
 
+import Link from "next/link"
+import { useSyncExternalStore } from "react"
+
+import { EnsayoAusente } from "@/components/ensayo-ausente"
 import { buttonVariants } from "@/components/ui/button"
 
+function suscribir() {
+  return () => {}
+}
+
+function esRutaDeEnsayo() {
+  return /\/ensayos\/[^/]+\/?$/.test(window.location.pathname)
+}
+
 export default function NotFound() {
+  const esEnsayo = useSyncExternalStore(suscribir, esRutaDeEnsayo, () => false)
+
+  if (esEnsayo) {
+    return <EnsayoAusente />
+  }
+
   return (
     <div className="mx-auto w-full max-w-3xl px-5 py-12 sm:px-6 sm:py-16">
       <h1 className="font-serif text-4xl tracking-tight sm:text-5xl">
